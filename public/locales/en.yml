@@ -1,0 +1,14 @@
+en:
+  brand:
+    title: "Surveyor: The Special Collections and Archives Catalog"
+    search_title: The Surveyor Catalog
+    title_link_text: Return to the DU Special Collections home page
+    welcome_page_title: Welcome
+    welcome_head: About Surveyor
+    welcome_message: <p>This database contains records describing archival and special collections materials from the University of Denver Libraries. Special Collections and Archives collect materials about the history of the University of Denver, square and folk dance traditions, and the Jewish community of Denver and the Rocky Mountain region, as well as works of literary and artistic interest from local creators. Special Collections and Archives consists of four collecting areas:</p><ul><li>Ira M. and Peryle Hayutin Beck Archives of Rocky Mountain Jewish History</li><li>Carson Brierly Giffin Dance Library</li><li>University Archives</li><li>Special Collections and Archives manuscript collections</li></ul><p>An A-Z list of collections in Special Collections and Archives may be found <a href="collections">here</a>.</p><p>This database contains information about archival collections only. Bibliographic resources curated by Special Collections and Archives may be found in <a href="http://du-primo.hosted.exlibrisgroup.com/primo_library/libweb/action/search.do?menuitem=0&vid=01UODE_MAIN">Compass</a>, our general library discovery tool.</p>
+  archive:
+    _plural: Special Collections and Archives
+  request:
+    date: When would you like to view the materials?
+    note: Please provide any additional details that may help us fulfill your request, e.g. "I would like to know more about University Hall's history, and would like to view U201 Box 27."
+    submitted: Your request has been submitted to Special Collections and Archives. An archivist will be in touch with you shortly with further details. Thanks!

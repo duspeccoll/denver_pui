@@ -1,0 +1,33 @@
+h1, .h1, a { color: #8b2332; }
+h2, .h2 { color: #7e0026; }
+h3 { color: #d5ba74; }
+
+#header > .row { border-bottom: 0.25rem solid #8b2332; }
+
+.btn-primary {
+  background-color: #8b2332;
+  border-color: #58001b;
+}
+
+.btn-primary:focus,.btn-primary.focus { background-color: #7e0032; }
+.btn-primary:hover { background-color: #7e0032; }
+
+.pagination > .active > a,
+.pagination > .active > a:hover,
+.pagination > .active > a:focus,
+.pagination > .active > span,
+.pagination > .active > span:hover,
+.pagination > .active > span:focus {
+  background-color: #8b2332;
+  border-color: #8b2332;
+}
+.pagination > li > a, .pagination > li > span { color: #8b2332; }
+
+.navbar-default .navbar-nav > li > a { color: #58001b; }
+
+.record-type-badge.agent { color: #0048a5; } 
+.record-type-badge.archival_object { color: #9aa86e; } 
+.record-type-badge.digital_object { color: #fdb813; } 
+.record-type-badge.repository { color: #0bb3e4; }
+.record-type-badge.resource { color: #f26522; }
+.record-type-badge.subject { color: #00637b; }
