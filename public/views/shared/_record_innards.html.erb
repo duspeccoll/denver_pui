@@ -3,10 +3,12 @@
 <% folder = %w(scopecontent bioghist arrangement phystech physloc otherfindaid custodhist acqinfo appraisal accruals originalsloc altformavail extent relatedmaterial separatedmaterial note_bibliography materialspec physdesc inscription physfacet dimensions edition fileplan legalstatus odd note processinfo note_index) %>
 <div class="upper-record-details">
     <% over = @result.note('abstract') %>
+    <!-- BEGIN local customization: remove scopecontent from the in-folder display -->
     <% if over.blank?
       over = @result.note('scopecontent')
-      folder.shift # remove scopecontent from the in-folder display
+      folder.shift
     end %>
+    <!-- END -->
 
     <% unless over.blank? %>
       <%= render partial: 'shared/single_note', locals: {:type => 'abstract', :note_struct => over, :notitle => true} %>
