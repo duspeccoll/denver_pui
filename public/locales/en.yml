@@ -12,3 +12,5 @@ en:
     date: When would you like to view the materials?
     note: Please provide any additional details that may help us fulfill your request, e.g. "I would like to know more about University Hall's history, and would like to view U201 Box 27."
     submitted: Your request has been submitted to Special Collections and Archives. An archivist will be in touch with you shortly with further details. Thanks!
+  alerts:
+    restrictions: Restrictions apply to this resource. Contact Special Collections and Archives for more information.
