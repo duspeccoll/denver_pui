@@ -4,6 +4,15 @@ h3 { color: #d5ba74; }
 
 #header > .row { border-bottom: 0.25rem solid #8b2332; }
 
+@media screen and (max-width: 400px) {
+  h1, .h1 { font-size: 1.5rem; }
+  #header > .row { height: 4.5rem; }
+}
+
+@media screen and (max-width: 320px) {
+  h1, .h1 { font-size: 1.2rem; }
+}
+
 .btn-primary {
   background-color: #8b2332;
   border-color: #58001b;
@@ -25,9 +34,9 @@ h3 { color: #d5ba74; }
 
 .navbar-default .navbar-nav > li > a { color: #58001b; }
 
-.record-type-badge.agent { color: #0048a5; } 
-.record-type-badge.archival_object { color: #9aa86e; } 
-.record-type-badge.digital_object { color: #fdb813; } 
+.record-type-badge.agent { color: #0048a5; }
+.record-type-badge.archival_object { color: #9aa86e; }
+.record-type-badge.digital_object { color: #fdb813; }
 .record-type-badge.repository { color: #0bb3e4; }
 .record-type-badge.resource { color: #f26522; }
 .record-type-badge.subject { color: #00637b; }
