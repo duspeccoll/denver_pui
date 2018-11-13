@@ -4,12 +4,12 @@ h3 { color: #d5ba74; }
 
 #header > .row { border-bottom: 0.25rem solid #8b2332; }
 
-@media screen and (max-width: 400px) {
+@media screen and (max-width: 480px) {
   h1, .h1 { font-size: 1.5rem; }
   #header > .row { height: 4.5rem; }
 }
 
-@media screen and (max-width: 320px) {
+@media screen and (max-width: 360px) {
   h1, .h1 { font-size: 1.2rem; }
 }
 
