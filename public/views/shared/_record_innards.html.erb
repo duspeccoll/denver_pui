@@ -1,54 +1,58 @@
 <!-- Look for '_inherited' and '*_inherited' properties -->
-<% non_folder = %w(summary langmaterial physdesc accessrestrict userestrict) %>
-<% folder = %w(scopecontent bioghist arrangement phystech physloc otherfindaid custodhist acqinfo appraisal accruals originalsloc altformavail extent relatedmaterial separatedmaterial note_bibliography materialspec physdesc inscription physfacet dimensions edition fileplan legalstatus odd note processinfo note_index) %>
+<% non_folder = %w(summary langmaterial physdesc accessrestrict userestrict bioghist) %>
+<% folder = %w(scopecontent arrangement phystech physloc otherfindaid custodhist acqinfo appraisal accruals originalsloc altformavail extent relatedmaterial separatedmaterial note_bibliography materialspec physdesc inscription physfacet dimensions edition fileplan legalstatus odd note processinfo note_index) %>
 <div class="upper-record-details">
-    <% over = @result.note('abstract') %>
-    <!-- BEGIN local customization: remove scopecontent from the in-folder display -->
-    <% if over.blank?
-      over = @result.note('scopecontent')
-      folder.shift
-    end %>
-    <!-- END -->
+  <% over = @result.note('abstract') %>
 
-    <% unless over.blank? %>
-      <%= render partial: 'shared/single_note', locals: {:type => 'abstract', :note_struct => over, :notitle => true} %>
+  <% unless over.blank? %>
+    <%= render partial: 'shared/single_note', locals: {:type => 'abstract', :note_struct => over} %>
+  <% end %>
+
+  <% unless @result.dates.blank? %>
+    <h3><%= t('resource._public.dates') %></h3>
+    <%= render partial: 'shared/dates', locals: {:dates => @result.dates} %>
+  <% end %>
+
+  <% if @result.agents && Array(@result.agents['creator']).length > 0 %>
+    <% a_direct_creator = @result.agents['creator'].reject{|r| r['_inherited']}.take(1) %>
+    <% unless a_direct_creator.empty? %>
+      <%= render partial: 'shared/agents_list', locals: {:list => {'creator' => a_direct_creator}} %>
     <% end %>
+  <% end %>
 
-    <% unless @result.dates.blank? %>
-      <h4><%= t('resource._public.dates') %></h4>
-      <%= render partial: 'shared/dates', locals: {:dates => @result.dates} %>
+  <!-- BEGIN local customization: display repository link above the fold -->
+  <% (@result.external_documents || []).each do |document| %>
+    <% if document['title'] == "Special Collections @ DU" %>
+      <h3>Digital Repository</h3>
+      <p><a href="<%= document['uri'] %>"><%= @result['title'] %></a></p>
     <% end %>
+  <% end %>
+  <!-- END -->
 
-    <% if @result.agents && Array(@result.agents['creator']).length > 0 %>
-      <% a_direct_creator = @result.agents['creator'].reject{|r| r['_inherited']}.take(1) %>
-      <% unless a_direct_creator.empty? %>
-        <%= render partial: 'shared/agents_list', locals: {:list => {'creator' => a_direct_creator}} %>
-      <% end %>
-    <% end %>
-
-    <% non_folder.each do |type| %>
-       <% note_struct =  @result.note(type) %>
-       <% unless note_struct['note_text'].blank? %>
+  <% non_folder.each do |type| %>
+    <% (@result.notes[type] || []).each do |note_struct| %>
+      <% unless note_struct['note_text'].blank? %>
         <%= render partial: 'shared/single_note', locals: {:type => type, :note_struct => note_struct}   %>
-       <% end %>
-    <% end %>
-
-    <% unless @result.extents.blank? %>
-      <h4><%= t('resource._public.extent') %></h4>
-       <% @result.extents.each do |ext| %>
-        <p class="extent"><%= inheritance(ext['_inherited']).html_safe %>
-	  <%= ext['display']%>
-	</p>
       <% end %>
     <% end %>
-    <% if @result.is_a?(Accession) && @result.inventory %>
-      <h4><%= t('accession._public.section.inventory') %></h4>
-      <p><%= @result.inventory %></p>
-    <% end %>
+  <% end %>
 
-    <% ASUtils.find_local_directories('public/views/_upper_record_innards.html.erb').each do |template| %>
-      <%= render :file => template if File.exists?(template) %>
+  <% unless @result.extents.blank? %>
+    <h3><%= t('resource._public.extent') %></h3>
+     <% @result.extents.each do |ext| %>
+      <p class="extent"><%= inheritance(ext['_inherited']).html_safe %>
+  <%= ext['display']%>
+</p>
     <% end %>
+  <% end %>
+  <% if @result.is_a?(Accession) && @result.inventory %>
+    <h3><%= t('accession._public.section.inventory') %></h3>
+    <p><%= @result.inventory %></p>
+  <% end %>
+
+  <% ASUtils.find_local_directories('public/views/_upper_record_innards.html.erb').each do |template| %>
+    <%= render :file => template if File.exists?(template) %>
+  <% end %>
 </div>
 
     <div class="acc_holder clear" >
@@ -96,8 +100,11 @@
     <%= render partial: 'shared/accordion_panel', locals: {:p_title => t('linked_instances'), :p_id => 'linked_instances_list', :p_body => x} %>
   <% end %>
 	<% unless @result.external_documents.blank? %>
-	 <% x = render partial: 'shared/present_list_external_docs', locals: {:list =>  @result.external_documents, :list_clss => 'external_docs'} %>
-	  <%= render partial: 'shared/accordion_panel', locals: {:p_title => t('external_docs'), :p_id => 'ext_doc_list', :p_body => x} %>
+    <% list = @result.external_documents.select{|doc| doc['title'] != "Special Collections @ DU"} %>
+    <% unless list.blank? %>
+      <% x = render partial: 'shared/present_list_external_docs', locals: {:list =>  list, :list_clss => 'external_docs'} %>
+      <%= render partial: 'shared/accordion_panel', locals: {:p_title => t('external_docs'), :p_id => 'ext_doc_list', :p_body => x} %>
+    <% end %>
 	<% end %>
 	<% unless @repo_info.blank? || @repo_info['top']['name'].blank? %>
            <% x= render partial: 'repositories/repository_details' %>
